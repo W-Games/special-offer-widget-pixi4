@@ -1,0 +1,33 @@
+{
+  "name": "special-offer-test",
+  "author": "Mark Kosokovits",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.js",
+  "keywords": [],
+  "license": "ISC",
+  "scripts": {
+    "clean": "rimraf dist",
+    "init": "mkdirp dist/games/special_offer/assets/",
+    "dist": "npm run clean && npm run init && npm run copy-audio && npm run copy-assets && npm run copy-rules && webpack -p --config webpack-build.config.js",
+    "bump": "npm version patch",
+    "build": "webpack --progress --config webpack.config.js",
+    "watch": "webpack --watch --progress --config webpack.config.js",
+    "serve": "lite-server"
+  },
+  "dependencies": {
+    "@pixi/filter-drop-shadow": "^5.2.0",
+    "@types/gsap": "^3.0.0",
+    "@types/node": "^6.0.46",
+    "@types/pixi.js": "^4.8.8",
+    "@types/webfontloader": "^1.6.28",
+    "gsap": "^2.1.3",
+    "pixi.js": "^4.8.8",
+    "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "ts-loader": "^1.1.0",
+    "typescript": "^3.2.2",
+    "webpack": "^2.4.1"
+  }
+}

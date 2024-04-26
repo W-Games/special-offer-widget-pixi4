@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Special Offer</title>
+	</head>
+<body>
+
+<button onclick="ShowDeal()">Show Deal</button>
+<button onclick="HideDeal()">Hide Deal</button>
+<button onclick="MoveDeal()">Move Deal</button>
+<button onclick="UpdateDealTimer()">Update Timer</button>
+
+<style type="text/css"> 
+	.container {
+		position: relative;
+	}
+
+	.bg {
+		top: 0px;
+		left: 0px;
+	}
+	
+	canvas {
+		top: 0px;
+		left: 0px;
+		position: absolute;
+	}
+</style>
+
+<script>
+	function MoveDeal() {
+		const jsonData = {
+		"_type": "HRD.MoveDeal",
+		"_x": 200,
+		"_y": 100,
+		}; 
+		SendMessageToCSharp(JSON.stringify(jsonData));
+	}
+
+	function HideDeal() {
+		const jsonData = { 
+		"_type": "HRD.HideDeal"
+		}; 
+		SendMessageToCSharp(JSON.stringify(jsonData));
+	}
+	
+	function ShowDeal() {
+		const jsonData = { 
+		"_type": "HRD.ShowDeal"
+		}; 
+		SendMessageToCSharp(JSON.stringify(jsonData));
+	}
+
+	var counter = 5;
+	function UpdateDealTimer() {
+		const jsonData = { 
+		"_type": "HRD.UpdateTimer",
+		"_time": "00:0" + counter
+		}; 
+
+ 		counter--;
+    	SendMessageToCSharp(JSON.stringify(jsonData));
+	}
+
+	function SendMessageToCSharp(data) {
+		window.postMessage({ message: data });
+  	}
+</script>
+
+<div class="container">
+	<div class="bg">
+		<img src="output/games/special_offer/assets/textures/bg.png" style="width: 75%; height: 75%">
+	</div>
+	<canvas id="canvas"></canvas>
+</div>
+
+<script src="output/games/special_offer/assets/game.js"></script>
+
+</body>
+</html>

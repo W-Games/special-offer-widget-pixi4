@@ -1,0 +1,21 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es5",
+    "sourceMap": true,
+      "module": "commonjs",
+      "preserveConstEnums": true,
+      "esModuleInterop": true, 
+      // "moduleResolution": "Node",
+      "lib": [
+          "dom",
+          "dom.iterable",  
+          "es5",
+          "es6",
+          "es2015.Promise",
+      ],
+      "typeRoots": [
+        "./@types"
+    ]
+  },
+}
