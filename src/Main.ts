@@ -160,7 +160,6 @@ export class Main extends PIXI.Container {
     }
     
     hideWidget() {
-        console
         TweenMax.to(this, .5, { alpha: 0 });
     }
     

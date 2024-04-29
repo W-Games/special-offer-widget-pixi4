@@ -30055,7 +30055,6 @@ var Main = /** @class */ (function (_super) {
         gsap_1.TweenMax.to(this, .5, { alpha: 1 });
     };
     Main.prototype.hideWidget = function () {
-        console;
         gsap_1.TweenMax.to(this, .5, { alpha: 0 });
     };
     Main.prototype.moveWidget = function (x, y) {
