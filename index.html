@@ -14,6 +14,15 @@
 <button onclick="UpdateDealTimer()">Update Timer</button>
 
 <style type="text/css"> 
+	html { 
+        overflow: auto; 
+    } 
+      
+    html, 
+    body {
+        background-color: #000000;
+    }
+
 	.container {
 		position: relative;
 	}
@@ -34,8 +43,8 @@
 	function MoveDeal() {
 		const jsonData = {
 		"_type": "HRD.MoveDeal",
-		"_x": 200,
-		"_y": 100,
+		"_x": 350,
+		"_y": 0,
 		}; 
 		SendMessageToCSharp(JSON.stringify(jsonData));
 	}
@@ -71,6 +80,22 @@
 </script>
 
 <div class="container">
+
+	<!-- Uncomment this for iframe and comment out div -->
+	<!-- <div class="bg">
+		<iframe 
+			frameborder="1"                          
+			marginheight="0" 
+			marginwidth="0" 
+			width="100%" 
+			height="100%" 
+			scrolling="auto",
+			id="frame"
+			src="output/games/special_offer/assets/textures/bg.png">
+	    </iframe>
+	</div> -->
+
+	<!-- Uncomment this for div and comment out iframe -->
 	<div class="bg">
 		<img src="output/games/special_offer/assets/textures/bg.png" style="width: 75%; height: 75%">
 	</div>
