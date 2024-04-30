@@ -1,4 +1,5 @@
 import 'pixi.js';
+// import 'pixi-filters';
 
 import Button from './Controls/Button';
 import WebFont from "webfontloader"
@@ -62,7 +63,7 @@ export class Main extends PIXI.Container {
                                                                             
         this.renderer.render(this.stage);
 
-        this.resize();
+        // this.resize();
     }
 
     start() {  
@@ -88,7 +89,7 @@ export class Main extends PIXI.Container {
         for (let i: number = 0; i < this.assets.url_textures.length; i++) {
             PIXI.loader.add(this.assets.url_textures[i]);
         }
-
+        
         PIXI.loader
             .on('progress', this.onAssetsProgress.bind(this))
             .once('complete', this.onAssetsComplete.bind(this))
@@ -97,11 +98,18 @@ export class Main extends PIXI.Container {
     
     onAssetsProgress(event: any) {
         let num: number = event.progress;
-
+        
         // console.log("Assets loaded %: ", num);
     }
-
+    
     onAssetsComplete() {
+        // this.dropShadow = new DropShadowFilter();
+        // this.dropShadow.blur = 0;
+        // this.dropShadow.alpha = 1;
+        // this.dropShadow.distance = 1;
+        // this.dropShadow.rotation = 0;
+        // this.dropShadow.color = 0x000000;
+
         this.layout = layout.SPECIAL_OFFER;
 
         this.specialOfferStatic = new PIXI.Sprite(PIXI.Texture.fromFrame(this.layout.specialOfferStatic.texture));
@@ -144,6 +152,7 @@ export class Main extends PIXI.Container {
         this.textField.pivot.y = Math.floor(this.textField.height / 2);
         this.textField.x = this.layout.textfield.x;
         this.textField.y = this.layout.textfield.y;
+        // this.textField.filters = [this.dropShadow];
         this.addChild(this.textField);
 
         this.timer = new Timer();

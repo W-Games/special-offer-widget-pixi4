@@ -29123,11 +29123,11 @@ if (true) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Event = /** @class */ (function () {
     function Event() {
+        this.ANIMATION_TICK = "ANIMATION_TICK";
         this.CLICK = "CLICK";
+        this.RESIZE = "RESIZE";
         this.TIMER_FINISHED = "TIMER_FINISHED";
         this.TIMER_TICK = "TIMER_TICK";
-        this.ANIMATION_TICK = "ANIMATION_TICK";
-        this.RESIZE = "RESIZE";
     }
     return Event;
 }());
@@ -29942,6 +29942,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(40);
+// import 'pixi-filters';
 var Button_1 = __importDefault(__webpack_require__(228));
 var webfontloader_1 = __importDefault(__webpack_require__(233));
 // import { DropShadowFilter } from '@pixi/filter-drop-shadow';
@@ -29976,7 +29977,7 @@ var Main = /** @class */ (function (_super) {
     Main.prototype.gameLoop = function () {
         requestAnimationFrame(this.gameLoop.bind(this));
         this.renderer.render(this.stage);
-        this.resize();
+        // this.resize();
     };
     Main.prototype.start = function () {
         this.loadFonts();
@@ -30008,6 +30009,12 @@ var Main = /** @class */ (function (_super) {
         // console.log("Assets loaded %: ", num);
     };
     Main.prototype.onAssetsComplete = function () {
+        // this.dropShadow = new DropShadowFilter();
+        // this.dropShadow.blur = 0;
+        // this.dropShadow.alpha = 1;
+        // this.dropShadow.distance = 1;
+        // this.dropShadow.rotation = 0;
+        // this.dropShadow.color = 0x000000;
         this.layout = Layout_1.layout.SPECIAL_OFFER;
         this.specialOfferStatic = new PIXI.Sprite(PIXI.Texture.fromFrame(this.layout.specialOfferStatic.texture));
         this.specialOfferStatic.pivot.x = Math.floor(this.specialOfferStatic.width / 2);
@@ -30044,6 +30051,7 @@ var Main = /** @class */ (function (_super) {
         this.textField.pivot.y = Math.floor(this.textField.height / 2);
         this.textField.x = this.layout.textfield.x;
         this.textField.y = this.layout.textfield.y;
+        // this.textField.filters = [this.dropShadow];
         this.addChild(this.textField);
         this.timer = new Timer_1.Timer();
         this.addChild(this.timer);
@@ -54287,6 +54295,12 @@ var Button = /** @class */ (function (_super) {
         graphics.drawRect(0, 0, 108, 108);
         graphics.endFill();
         this.addChild(graphics);
+        var coords = [];
+        coords.push(0, 0);
+        coords.push(108, 0);
+        coords.push(108, 108);
+        coords.push(0, 108);
+        this.hitArea = new PIXI.Polygon(coords);
     };
     return Button;
 }(PIXI.Container));
@@ -54349,7 +54363,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Layout = /** @class */ (function () {
     function Layout() {
         this.GAME = {
-            game: { width: 500, height: 335, scale: .5 },
+            game: { width: 128, height: 128, scale: .5 },
         };
         this.FONTS = {
             google: {
@@ -54361,7 +54375,7 @@ var Layout = /** @class */ (function () {
             specialOfferStatic: { x: 128, y: 128, texture: "UI_Widget_SpecialOffer_Static.png" },
         };
         this.TEXTFIELD = {
-            textfield: { x: 128, y: 199, label: "00:00", align: 'center', font: { align: 'center', fontFamily: 'Roboto', fontSize: '25px', fontWeight: '700', fill: '#FFFFFF', stroke: '#FFFFFF', strokeThickness: 0, miterLimit: 2 } },
+            textfield: { x: 128, y: 199, label: "", align: 'center', font: { align: 'center', fontFamily: 'Roboto', fontSize: '25px', fontWeight: '700', fill: '#FFFFFF', stroke: '#FFFFFF', strokeThickness: 0, miterLimit: 2 } },
         };
     }
     return Layout;

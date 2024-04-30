@@ -10,8 +10,6 @@
 
 <button onclick="ShowDeal()">Show Deal</button>
 <button onclick="HideDeal()">Hide Deal</button>
-<button onclick="MoveDeal()">Move Deal</button>
-<button onclick="UpdateDealTimer()">Update Timer</button>
 
 <style type="text/css"> 
 	html { 
@@ -20,6 +18,7 @@
       
     html, 
     body {
+		font-family: 'Roboto', 'Arial';
         background-color: #cccccc;
     }
 
@@ -43,19 +42,9 @@
 </style>
 
 <script>
-	function MoveDeal() {
-		const jsonData = {
-		"_type": "HRD.MoveDeal",
-		"_x": 350,
-		"_y": 0,
-		}; 
-
-		SendMessageToCSharp(JSON.stringify(jsonData));
-	}
-
 	function HideDeal() {
 		const jsonData = { 
-		"_type": "HRD.HideDeal"
+			"_type": "HRD.HideDeal"
 		}; 
 
 		SendMessageToCSharp(JSON.stringify(jsonData));
@@ -63,20 +52,18 @@
 	
 	function ShowDeal() {
 		const jsonData = { 
-		"_type": "HRD.ShowDeal"
+			"_type": "HRD.ShowDeal"
 		}; 
 
 		SendMessageToCSharp(JSON.stringify(jsonData));
 	}
 
-	var counter = 5;
-	function UpdateDealTimer() {
+	function UpdateDealTimer(time) {
 		const jsonData = { 
-		"_type": "HRD.UpdateTimer",
-		"_time": "00:0" + counter
+			"_type": "HRD.UpdateTimer",
+			"_time": time
 		}; 
 
- 		counter--;
     	SendMessageToCSharp(JSON.stringify(jsonData));
 	}
 
@@ -85,26 +72,44 @@
   	}
 </script>
 
-<div class="container">
+<script>
+	let countDownDate = new Date();
+	countDownDate = new Date(countDownDate.getTime() + 2 * 60 * 1000);
 
+	let x = setInterval(function() {
+		let now = new Date().getTime();
+		let distance = countDownDate - now;
+		let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		
+		if (distance < 0) {
+			clearInterval(x);
+		}
+		else {
+			UpdateDealTimer((minutes < 10 ? "0" : "") + minutes + ":" + (seconds <  10 ? "0" : "") + seconds);
+		}
+	}, 1000);
+</script>
+
+<div class="container">
 	<!-- Uncomment this for iframe and comment out div below -->
-	<!-- <div class="bg">
+	<div class="bg">
 		<iframe 
 			frameborder="1"                          
 			marginheight="0" 
 			marginwidth="0" 
 			width="100%" 
-			height="100%" 
+			height="300px" 
 			scrolling="auto",
 			id="frame"
 			src="output/games/special_offer/assets/textures/bg.png">
 	    </iframe>
-	</div> -->
+	</div>
 
 	<!-- Uncomment this for div and comment out above iframe -->
-	<div class="bg">
+	<!-- <div class="bg">
 		<img src="output/games/special_offer/assets/textures/bg.png" style="width: 100%; height: 100%">
-	</div>
+	</div> -->
 	<canvas id="canvas"></canvas>
 </div>
 

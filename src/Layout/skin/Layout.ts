@@ -1,6 +1,6 @@
 class Layout {
     public GAME: any = {
-        game: { width: 500, height: 335, scale:.5 },
+        game: { width: 128, height: 128, scale:.5 },
     }
     
     public FONTS: any = {
@@ -14,8 +14,8 @@ class Layout {
         specialOfferStatic: { x: 128, y: 128, texture: "UI_Widget_SpecialOffer_Static.png" },
     } 
 
-     public TEXTFIELD: any = {
-        textfield: { x: 128, y: 199, label: "00:00", align: 'center', font: { align: 'center', fontFamily: 'Roboto', fontSize: '25px', fontWeight: '700', fill: '#FFFFFF', stroke: '#FFFFFF', strokeThickness: 0, miterLimit: 2 }},
+    public TEXTFIELD: any = {
+        textfield: { x: 128, y: 199, label: "", align: 'center', font: { align: 'center', fontFamily: 'Roboto', fontSize: '25px', fontWeight: '700', fill: '#FFFFFF', stroke: '#FFFFFF', strokeThickness: 0, miterLimit: 2 }},
     }
 }
 
