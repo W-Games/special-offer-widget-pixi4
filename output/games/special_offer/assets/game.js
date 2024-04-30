@@ -30074,7 +30074,12 @@ var Main = /** @class */ (function (_super) {
         this.textField.pivot.x = Math.floor(this.textField.width / 2);
     };
     Main.prototype.onClickDeal = function (event) {
-        console.log('Deal clicked');
+        var jsonData = {
+            "_type": "HRD.DealClicked"
+        };
+        window.postMessage({
+            message: JSON.stringify(jsonData),
+        }, '*');
     };
     Main.prototype.setGraphicVisibility = function (event) {
         if (event.detail == "static") {

@@ -183,7 +183,13 @@ export class Main extends PIXI.Container {
     }
 
     onClickDeal(event: Event): void {
-        console.log('Deal clicked');
+        let jsonData = { 
+			"_type": "HRD.DealClicked"
+		}; 
+
+        window.postMessage({
+            message: JSON.stringify(jsonData),
+        }, '*');
     }
 
     setGraphicVisibility(event: any): void {

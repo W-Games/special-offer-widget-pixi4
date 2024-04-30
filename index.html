@@ -70,9 +70,7 @@
 	function SendMessageToCSharp(data) {
 		window.postMessage({ message: data });
   	}
-</script>
 
-<script>
 	let countDownDate = new Date();
 	countDownDate = new Date(countDownDate.getTime() + 2 * 60 * 1000);
 
@@ -89,6 +87,19 @@
 			UpdateDealTimer((minutes < 10 ? "0" : "") + minutes + ":" + (seconds <  10 ? "0" : "") + seconds);
 		}
 	}, 1000);
+
+	window.addEventListener("message", (event) => {
+		if (event.data != null) {
+			let message = JSON.parse(event.data.message);			
+            
+			switch(message._type) {
+				case "HRD.DealClicked": {
+					console.log("Deal Clicked");
+                    break;
+                }
+            }
+        }
+	});
 </script>
 
 <div class="container">
