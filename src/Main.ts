@@ -1,10 +1,9 @@
 import 'pixi.js';
-// import 'pixi-filters';
 
 import Button from './Controls/Button';
 import WebFont from "webfontloader"
 
-// import { DropShadowFilter } from '@pixi/filter-drop-shadow';
+import { DropShadowFilter } from '@pixi/filter-drop-shadow';
 import { event } from "./Event/Event";
 import { layout } from "./Layout/skin/Layout";
 import { TweenMax } from "gsap";
@@ -24,7 +23,7 @@ export class Main extends PIXI.Container {
     protected textField: PIXI.Text;
     protected timer: Timer;
     protected ratio: number;
-    // protected dropShadow: DropShadowFilter;
+    protected dropShadow: DropShadowFilter;
 
     protected storedWidth: number = 0;
     protected storedHeight: number = 0;
@@ -36,15 +35,15 @@ export class Main extends PIXI.Container {
 
         this.assets = $assets;
         this.config = $config;
-
+        
         this.ratio = layout.GAME.game.width / layout.GAME.game.height;
-
+        
         window.addEventListener("message", this.messageHandler.bind(this));
-
+        
         addEventListener(event.TIMER_FINISHED, (event) => { this.setGraphicVisibility(event) });
-
+        
         let view: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
-
+        
         this.renderer = PIXI.autoDetectRenderer(layout.GAME.game.width, layout.GAME.game.height, { view: view, transparent: true });
         
         this.gameContainer = new PIXI.Container();
@@ -52,7 +51,7 @@ export class Main extends PIXI.Container {
         
         this.stage = new PIXI.Container();
         this.stage.addChild(this.gameContainer);
-
+        
         this.gameLoop();
 
         this.start();
@@ -103,13 +102,6 @@ export class Main extends PIXI.Container {
     }
     
     onAssetsComplete() {
-        // this.dropShadow = new DropShadowFilter();
-        // this.dropShadow.blur = 0;
-        // this.dropShadow.alpha = 1;
-        // this.dropShadow.distance = 1;
-        // this.dropShadow.rotation = 0;
-        // this.dropShadow.color = 0x000000;
-
         this.layout = layout.SPECIAL_OFFER;
 
         this.specialOfferStatic = new PIXI.Sprite(PIXI.Texture.fromFrame(this.layout.specialOfferStatic.texture));
@@ -135,6 +127,25 @@ export class Main extends PIXI.Container {
         this.specialOffer.interactive = false;
         this.addChild(this.specialOffer);
 
+        this.layout = layout.TEXTFIELD;
+        
+        this.dropShadow = new DropShadowFilter();
+        this.dropShadow.blur = .3;
+        this.dropShadow.alpha = 1;
+        this.dropShadow.distance = 2;
+        this.dropShadow.rotation = 90;
+        this.dropShadow.color = 0x000000;
+
+        this.textField = new PIXI.Text(this.layout.textfield.label, this.layout.textfield.font);
+        this.textField.pivot.x = Math.floor(this.textField.width / 2);
+        this.textField.pivot.y = Math.floor(this.textField.height / 2);
+        this.textField.x = this.layout.textfield.x;
+        this.textField.y = this.layout.textfield.y;
+        this.textField.filters = [this.dropShadow];
+        this.addChild(this.textField);
+        
+        this.layout = layout.SPECIAL_OFFER;
+        
         this.button = new Button();
         this.button.pivot.x = Math.floor(this.button.width / 2);
         this.button.pivot.y = Math.floor(this.button.height / 2);
@@ -145,21 +156,11 @@ export class Main extends PIXI.Container {
         this.button.addListener("click", this.onClickDeal.bind(this));
         this.addChild(this.button);
 
-        this.layout = layout.TEXTFIELD;
-
-        this.textField = new PIXI.Text(this.layout.textfield.label, this.layout.textfield.font);
-        this.textField.pivot.x = Math.floor(this.textField.width / 2);
-        this.textField.pivot.y = Math.floor(this.textField.height / 2);
-        this.textField.x = this.layout.textfield.x;
-        this.textField.y = this.layout.textfield.y;
-        // this.textField.filters = [this.dropShadow];
-        this.addChild(this.textField);
-
         this.timer = new Timer();
         this.addChild(this.timer);
-
+        
         this.scale.x = this.scale.y = layout.GAME.game.scale;
-
+        
         // this.alpha = 0;
     }
     
@@ -170,11 +171,6 @@ export class Main extends PIXI.Container {
     
     hideWidget() {
         TweenMax.to(this, .5, { alpha: 0 });
-    }
-    
-    moveWidget(x: number, y: number) {
-        this.x = x;
-        this.y = y;
     }
    
     updateTimer(value: string) {
@@ -220,10 +216,6 @@ export class Main extends PIXI.Container {
                 }
                 case "HRD.ShowDeal": {
                     this.showWidget();
-                    break;
-                }
-                case "HRD.MoveDeal": {
-                    this.moveWidget(message._x, message._y);
                     break;
                 }
                 case "HRD.UpdateTimer": {

@@ -16,7 +16,6 @@
     "serve": "lite-server"
   },
   "dependencies": {
-    "@pixi/filter-drop-shadow": "^5.2.0",
     "@types/gsap": "^3.0.0",
     "@types/node": "^6.0.46",
     "@types/pixi.js": "^4.8.9",
@@ -29,6 +28,6 @@
   "devDependencies": {
     "ts-loader": "^1.1.0",
     "typescript": "^3.2.2",
-    "webpack": "^2.4.1"
+    "webpack": "2.4.1"
   }
 }
