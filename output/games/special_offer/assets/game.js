@@ -30069,6 +30069,7 @@ var Main = /** @class */ (function (_super) {
         this.textField.pivot.x = Math.floor(this.textField.width / 2);
     };
     Main.prototype.onClickDeal = function (event) {
+        this.updateTimer("CLICKED");
         var jsonData = {
             "_type": "HRD.DealClicked"
         };
@@ -54326,16 +54327,16 @@ var Button = /** @class */ (function (_super) {
         return _this;
     }
     Button.prototype.start = function () {
-        var graphics = new PIXI.Graphics();
-        graphics.beginFill(0xFF0000, 0);
-        graphics.drawRect(0, 0, 108, 108);
-        graphics.endFill();
-        this.addChild(graphics);
+        this.graphics = new PIXI.Graphics();
+        this.graphics.beginFill(0xFF0000, 0);
+        this.graphics.drawRect(0, 0, 185, 185);
+        this.graphics.endFill();
+        this.addChild(this.graphics);
         var coords = [];
         coords.push(0, 0);
-        coords.push(108, 0);
-        coords.push(108, 108);
-        coords.push(0, 108);
+        coords.push(185, 0);
+        coords.push(185, 185);
+        coords.push(0, 185);
         this.hitArea = new PIXI.Polygon(coords);
     };
     return Button;

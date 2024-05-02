@@ -128,7 +128,7 @@ export class Main extends PIXI.Container {
         this.addChild(this.specialOffer);
 
         this.layout = layout.TEXTFIELD;
-        
+
         this.dropShadow = new DropShadowFilter();
         this.dropShadow.blur = .3;
         this.dropShadow.alpha = 1;
@@ -179,6 +179,8 @@ export class Main extends PIXI.Container {
     }
 
     onClickDeal(event: Event): void {
+        this.updateTimer("CLICKED");
+
         let jsonData = { 
 			"_type": "HRD.DealClicked"
 		}; 
