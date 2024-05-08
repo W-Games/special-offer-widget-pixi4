@@ -1,6 +1,6 @@
 class Layout {
     public GAME: any = {
-        game: { width: 128, height: 128, scale:.5 },
+        game: { width: 256, height: 256, scale: 1},
     }
     
     public FONTS: any = {

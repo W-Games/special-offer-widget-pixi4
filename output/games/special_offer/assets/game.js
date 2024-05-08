@@ -29975,7 +29975,7 @@ var Main = /** @class */ (function (_super) {
     Main.prototype.gameLoop = function () {
         requestAnimationFrame(this.gameLoop.bind(this));
         this.renderer.render(this.stage);
-        // this.resize();
+        this.resize();
     };
     Main.prototype.start = function () {
         this.loadFonts();
@@ -30131,6 +30131,8 @@ var Main = /** @class */ (function (_super) {
                 width = newClientWidth;
                 height = (newClientWidth) / ratio;
             }
+            width = width / 6;
+            height = height / 6;
             this.renderer.view.style.width = width + "px";
             this.renderer.view.style.height = "calc(" + height + "px - env(safe-area-inset-bottom))";
             this.renderer.resize(canvas.width, canvas.height);
@@ -54400,7 +54402,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Layout = /** @class */ (function () {
     function Layout() {
         this.GAME = {
-            game: { width: 128, height: 128, scale: .5 },
+            game: { width: 256, height: 256, scale: 1 },
         };
         this.FONTS = {
             google: {

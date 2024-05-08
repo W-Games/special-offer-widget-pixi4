@@ -62,7 +62,7 @@ export class Main extends PIXI.Container {
                                                                             
         this.renderer.render(this.stage);
 
-        // this.resize();
+        this.resize();
     }
 
     start() {  
@@ -258,9 +258,11 @@ export class Main extends PIXI.Container {
                 height = (newClientWidth) / ratio;
             }
 
+            width = width / 6;
+            height = height / 6;
+
             this.renderer.view.style.width = `${width}px`;
             this.renderer.view.style.height = `calc(${height}px - env(safe-area-inset-bottom))`;
-
             this.renderer.resize(canvas.width, canvas.height);
         }
 
